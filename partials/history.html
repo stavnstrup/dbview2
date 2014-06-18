@@ -1,0 +1,18 @@
+<p>history</p>
+
+<p>Database version: {{nispdb.revision}}, version {{nispdb.revhistory.revision[0].revnumber}}, released {{nispdb.revhistory.revision[0].date | date:'longDate'}}</p>
+
+
+
+<table border="1">
+  <tr>
+    <th>Version</th>
+    <th>Date</th>
+    <th>Description</th>
+  </tr>
+  <tr ng-cloak ng-repeat="rev in nispdb.revhistory.revision">
+    <td>{{rev.revnumber}}</td>
+    <td>{{rev.date}}</td>
+    <td>{{rev.revdescription}}</td>
+  </tr>
+</table>

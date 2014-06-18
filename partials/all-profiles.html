@@ -1,0 +1,27 @@
+<p>all profiles</p>
+
+
+<p>Database version: {{nispdb.revision}}, version {{nispdb.revhistory.revision[0].revnumber}}, released:  {{nispdb.revhistory.revision[0].date | date:'longDate'}}</p>
+
+<form novalidate>
+<table>
+  <tr>
+    <td>Title: <input type="text" ng-model="filter.title"/></td>
+    <td>Remarks: <input type="text" ng-model="filter.applicability"/></td>
+    <td>Organisation: <input type="text" ng-model="filter.organisation"/></td>
+  </tr>
+</table>
+</form>
+
+<table border="1">
+  <tr>
+    <th>Title</th>
+    <th>Applicability</th>
+    <th>Organisation</th>
+  </tr>
+  <tr ng-cloak ng-repeat="pro in nispdb.records.profile | filter:filter.title | filter:filter.applicability |  filter:filter.organisation">
+    <td><a href="#/profile/{{pro.id}}">{{pro.profilespec.title}}</a></td>
+    <td>{{pro.applicability}}</td>
+    <td>{{pro.profilespec.orgid}}</td>
+  </tr>
+</table>

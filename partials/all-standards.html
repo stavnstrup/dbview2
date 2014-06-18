@@ -1,0 +1,26 @@
+<p>Database version: {{nispdb.revision}}, version {{nispdb.revhistory.revision[0].revnumber}}, released {{nispdb.revhistory.revision[0].date | date:'longDate'}} </p>
+
+
+<form novalidate>
+<table>
+  <tr>
+    <td>Title: <input type="text" ng-model="filter.title"/></td>
+    <td>Remarks: <input type="text" ng-model="filter.applicability"/></td>
+    <td>Organisation: <input type="text" ng-model="filter.organisation"/></td>
+  </tr>
+</table>
+</form>
+
+
+<table border="1">
+  <tr>
+    <th class="all-title">Title</th>
+    <th class="all-applicability">Applicability</th>
+    <th class="all-organisation">Organisation</th>
+  </tr>
+  <tr ng-cloak ng-repeat="std in nispdb.records.standard | filter:filter.title | filter:filter.applicability |  filter:filter.organisation">
+    <td><a href="#/standard/{{std.id}}">{{std.document.title}}</a></td>
+    <td>{{std.applicability}}</td>
+    <td>{{std.document.orgid}}</td>
+  </tr>
+</table>

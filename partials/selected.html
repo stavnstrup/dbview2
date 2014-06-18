@@ -1,0 +1,32 @@
+<h1>{{nispdb.header}}</h1>
+
+<p>Database version: {{nispdb.revision}}, version
+{{nispdb.revhistory.revision[0].revnumber}}, released: {{nispdb.revhistory.revision[0].date | date:'longDate'}}</p>
+
+
+<form novalidate>
+<table>
+  <tr>
+    <td class="sel-taxonomy">Taxonomy: <input type="text" ng-model="filter.taxonomy"/></td>
+    <td class="sel-title">Title: <input type="text" ng-model="filter.title"/></td>
+    <td class="sel-remarks">Remarks: <input type="text" ng-model="filter.remarks"/></td>
+    <td class="sel-rationale">Rationale: <input type="text" ng-model="filter.rationale"/></td>
+  </tr>
+</table>
+</form>
+
+
+<table border="1">
+  <tr>
+    <th class="sel-taxonomy">Taxonomy</th>
+    <th class="sel-title">Title</th>
+    <th class="sel-remarks">Remarks</th>
+    <th class="sel-rationale">Rationale</th>
+  </tr>
+  <tr ng-cloak ng-repeat="std in nispdb.standard | filter:filter.taxonomy | filter:filter.title | filter:filter.remarks |  filter:filter.rationale">
+    <td>{{std.taxonomy}}</td>
+    <td><a href="#/standard/{{std.id}}">{{std.title}}</a></td>
+    <td>{{std.remarks}}</td>
+    <td>{{std.rationale}}</td>
+  </tr>
+</table>
