@@ -11,6 +11,7 @@
 
 <xsl:template match="standards">
   <xsl:apply-templates select="records/standard"/>
+  <xsl:apply-templates select="records/profile"/>
 </xsl:template>
 
 

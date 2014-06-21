@@ -1,46 +1,68 @@
-
 <table>
 <tr>
-  <th colspan="8>Information on standard {{.title}}</th>
+  <th colspan="8">Information on standard {{standard.document.title}}</th>
 </tr>
 <tr>
   <th>Title</th>
-  <td colspan="7">{{}}</td>
+  <td colspan="7">{{standard.document.title}}</td>
 </tr>
 <tr>
   <th>Description</th><td colspan="7"></td>
 </tr>
 <tr>
-  <th>Organisation</th><td>{{}}</td>
-  <th>Publication number</th><td>{{}}</td>
-  <th>Date</th><td>{{}}</td>
-  <th>Version</th><td></td>
-</tr>	
-<tr>
-  <th>Contains</th><td colspan="7"></td>
+  <th>Organisation</th><td>{{standard.document.orgid}}</td>
+  <th>Publication number</th><td>{{standard.document.pubnum}}</td>
+  <th>Date</th><td>{{standard.document.date}}</td>
+  <th>Version</th><td>{{standard.document.version}}</td>
 </tr>
 <tr>
-  <th>Corrections</th><td colspan="7">---</td>
+  <th>Contains</th><td colspan="7">
+    <ul>
+      <li ng-repeat="r in standard.document.substandards.refstandard">
+        <a href="#/standard/{{r.refid}}">{{r.title}}</a>
+      </li>
+      <li ng-repeat="r in profile.parts.refprofile">
+        <a href="#/standard/{{r.refid}}">{{r.title}}</a>
+      </li>
+    </ul>
+  </td>
+</tr>
+<tr>
+  <th>Corrections</th><td colspan="7">
+     <span ng-if="standard.document.correction.length() = 0">---</span>
+     <ul ng-if="standard.document.correction.length() != 0">
+       <li ng-repeat="coor in standard.document.correction">Pub: {{coor.cpubnum}}, date: {{coor.date}}</li>
+     </ul>
+  </td>  
 </tr>
 <tr>
   <th>Also known as</th><td>---</td>
 </tr>
 <tr>
-  <th>Applicability</th><td colspan="7"></td>
+  <th>Applicability</th><td colspan="7">{{standard.applicability}}</td>
 </tr>
 <tr>
-  <th colspan="2">Status</th><td colspan="6">Modifications</td>
-
-  1998-11-10: Added after NISP version 0.1.
-  2001-11-20: Changed after NISP version 0.3.
-  2003-07-31: Changed after NISP version 0.5.
-  2005-09-23: Changed after NISP version 0.7.
+  <th colspan="2">Status</th><td colspan="6">Modifications
+  <ul ng-if="angular.isArray(standard.status.history.event)">
+    <li ng-repeat="ev in standard.status.history.event">
+      {{ev.date}}:  {{ev.flag}} for version {{ev.version}}. 
+    </li>
+  </ul>
+  <ul ng-if="!angular.isArray(standard.status.history.event)">
+    <li>
+      {{standard.status.history.event.date}}:  {{standard.status.history.event.flag}} for version {{standard.status.history.event.version}}. 
+    </li>
+  </ul>
+</td>
 </tr>
 <tr>
-  <th>External link</th><td colspan="7">	:	https://www.iol.unh.edu/services/testing/vganylan/</td>
+  <th>External link</th><td colspan="7">{{standard.status.uri}}</td>
 </tr>
-
-Referenced from	:	---
-Contained in	:	---
+<tr>
+  <th>Referenced from</th><td colspan="7">---</td>
+</tr>
+<tr>
+  <th>Contained in</th><td colspan="7">---</td>
+</tr>
 
 </table>

@@ -4,8 +4,7 @@ var myApp = angular.module('myApp', ['ngRoute']);
 myApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
     $routeProvider
         .when ('/', {
-            templateUrl: 'partials/home.html',
-	    controller: 'XController'
+            templateUrl: 'partials/home.html'
         })
         .when ('/standards', {
             templateUrl: 'partials/all-standards.html',
@@ -28,9 +27,8 @@ myApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $
  	    controller: 'FadingController'
         })
         .when ('/standard/:stdid', {
-//          templateUrl: 'partials/home.html',
-	    template: '<p>Single Standards</p>' 
-//	    controller: XController
+            templateUrl: 'partials/standard.html',
+ 	    controller: 'StandardController'
         })
         .when ('/revisions', {
             templateUrl: 'partials/history.html',
@@ -50,6 +48,18 @@ myApp.controller('StandardsController', ['$scope', '$http', function ($scope, $h
           $scope.nispdb = angular.fromJson(data).standards;
       });
 }]);
+
+myApp.controller('StandardController', ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
+    $scope.standard = {};
+    $scope.stdid = $routeParams.stdid;
+
+    $http.get('/data/standards/' + $scope.stdid + '.json')
+//    $http.get('/data/standards/ietf-rfc1812.json')
+      .success(function (data) {
+          $scope.standard = angular.fromJson(data).standard;
+      });
+}]);
+
 
 myApp.controller('ProfilesController', ['$scope', '$http', function ($scope, $http) {
     $scope.nispdb = {};
@@ -98,4 +108,5 @@ myApp.controller('RevController', ['$scope', '$http', function ($scope, $http) {
           $scope.nispdb = angular.fromJson(data).standards;
       });
 }]);
+
 
