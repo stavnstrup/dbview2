@@ -9,26 +9,12 @@
 
   <xsl:strip-space elements="*"/>  
 
-<!--
-  <xsl:template match="applicability|para|em"/>
--->
 
-<!--
-<xsl:template match="revhistory|taxonomy|lists|organisations|community-of-interest"/>
--->
+<xsl:template match="applicability"><applicability><xsl:value-of select="normalize-space(.)"/></applicability></xsl:template>
+
 
 <xsl:template match="taxonomy|lists|organisations|community-of-interest|standard"/>
 
-<!--
-<xsl:template match="">
--->
-
-<!--
-<xsl:template match="para"><p><xsl:apply-templates/></p></xsl:template>
-
-<xsl:template match="itemizedlist"><ul><xsl:apply-templates/></ul></xsl:template>
-<xsl:template match="listitem"><li><xsl:apply-templates/></li></xsl:template>
--->
 
 <xsl:template match="@*|node()">
   <xsl:copy>

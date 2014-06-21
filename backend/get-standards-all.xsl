@@ -10,7 +10,7 @@
   <xsl:strip-space elements="*"/>  
 
 
-  <xsl:template match="applicability"><applicability><xsl:value-of select="normalize-space(.)"/></applicability></xsl:template>
+<xsl:template match="applicability"><applicability><xsl:value-of select="normalize-space(.)"/></applicability></xsl:template>
 
 <!--
   <xsl:template match="para|em"/>
